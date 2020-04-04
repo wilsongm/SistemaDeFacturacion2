@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemVenta.Bi.Dto
 {
-    class ProviderDto
+    public class ProviderDto
     {
         public int Id { get; set; }
         public string Cedula { get; set; }

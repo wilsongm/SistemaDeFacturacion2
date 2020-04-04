@@ -6,7 +6,7 @@ using SystemVenta.Model.Entities;
 
 namespace SystemVenta.api.BaseRepository.IGenericRepository
 {
-    interface IProviderRepository
+    public interface IProviderRepository
     {
         Task<List<Provider>> ObtenerprovidersAsync();
         Task<Provider> ObtenerproviderAsync(int id);

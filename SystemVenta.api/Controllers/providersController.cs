@@ -14,47 +14,53 @@ namespace SystemVenta.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class providersController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProviderRepository _prociderRepository;
         private readonly IMapper _mapper;
         private readonly SystemVentaDbContext _context;
 
-        public ProductsController(IProductRepository productRepository, IMapper mapper, SystemVentaDbContext context)
+        public providersController(IProviderRepository ProviderRepository, IMapper mapper, SystemVentaDbContext context)
         {
-            _productRepository = productRepository;
+            _prociderRepository = ProviderRepository;
             _mapper = mapper;
             this._context = context;
         }
-        // GET: api/Products
+        // GET: api/providers
         [HttpGet("[action]")]
-        public IEnumerable<ProductDto> GetProduct()
+        public IEnumerable<ProviderDto> GetProvider()
         {
-            var list = _context.Products.Where(x => !x.IsDeleted).ToList();
+            var list = _context.Providers.Where(x => !x.IsDeleted).ToList();
 
 
-            return list.Select(p => new ProductDto
+            return list.Select(p => new ProviderDto
             {
                 Id = p.Id,
+                Cedula = p.Cedula,
                 Nombre = p.Nombre,
-                Precio = p.Precio
+                Telefono = p.Telefono,
+                Email = p.Email
             });
         }
 
-        // POST: api/Products
+
+
+        // POST: api/providers
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductDto entityDto)
+        public async Task<IActionResult> CreateProvider([FromBody] ProviderDto entityDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            Product product = new Product
+            Provider provider = new Provider
             {
+                Cedula = entityDto.Cedula,
                 Nombre = entityDto.Nombre,
-                Precio = entityDto.Precio
+                Telefono = entityDto.Telefono,
+                Email = entityDto.Email
             };
-            _context.Products.Add(product);
+            _context.Providers.Add(provider);
             try
             {
                 await _context.SaveChangesAsync();
@@ -64,13 +70,13 @@ namespace SystemVenta.api.Controllers
 
                 throw;
             }
-            return Ok(product);
+            return Ok(provider);
 
         }
 
-        // PUT: api/Products/5
+        // PUT: api/providers/5
         [HttpPut("[action]")]
-        public async Task<IActionResult> EditProduct(ProductDto entityDto)
+        public async Task<IActionResult> EditProvider(ProviderDto entityDto)
         {
             if (!ModelState.IsValid)
             {
@@ -82,11 +88,12 @@ namespace SystemVenta.api.Controllers
                 return NotFound();
             }
 
-            var result = await _context.Products.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
+            var result = await _context.Providers.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
 
+            result.Cedula = entityDto.Cedula;
             result.Nombre = entityDto.Nombre;
-            result.Precio = entityDto.Precio;
-
+            result.Telefono = entityDto.Telefono;
+            result.Email = entityDto.Email;
             try
             {
                 await _context.SaveChangesAsync();
@@ -102,20 +109,20 @@ namespace SystemVenta.api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpPut("[action]/{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProvider(int id)
         {
             if (id == 0)
             {
                 return BadRequest();
             }
 
-            var product = await _context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var provider = await _context.Providers.Where(x => x.Id == id).FirstOrDefaultAsync();
 
-            if (product is null)
+            if (provider is null)
                 return NotFound();
 
 
-            product.IsDeleted = true;
+            provider.IsDeleted = true;
 
             try
             {

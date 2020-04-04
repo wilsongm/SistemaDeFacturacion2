@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using SystemVenta.Model.Entities;
 
 namespace SystemVenta.Model.SystemVentaDb
 {
-   
-        public class SystemVentaDbContext : DbContext
+
+    public class SystemVentaDbContext : DbContext
     {
         public SystemVentaDbContext(DbContextOptions<SystemVentaDbContext> options) : base(options)
         {
