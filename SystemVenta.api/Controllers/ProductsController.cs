@@ -31,7 +31,7 @@ namespace SystemVenta.api.Controllers
         [HttpGet("[action]")]
         public IEnumerable<ProductDto> GetProduct()
         {
-            var list =  _context.Products.ToList();
+            var list =  _context.Products.Where( x => !x.IsDeleted).ToList();
 
 
             return list.Select(p => new ProductDto
@@ -43,12 +43,12 @@ namespace SystemVenta.api.Controllers
         }
 
         // POST: api/Products
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<IActionResult> CreateProduct([FromBody] ProductDto entityDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
             Product product = new Product
             {
@@ -70,15 +70,64 @@ namespace SystemVenta.api.Controllers
         }
 
         // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("[action]")]
+        public async Task<IActionResult> EditProduct(ProductDto entityDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(entityDto.Id <= 0)
+            {
+                return NotFound();
+            }
+
+            var result = await _context.Products.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
+
+            result.Nombre = entityDto.Nombre;
+            result.Precio = entityDto.Precio;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Ok();
+
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
+          if(id == 0)
+            {
+                return BadRequest();
+            }
+
+            var product =  await _context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+                if (product is null)
+                    return NotFound();
+
+
+                product.IsDeleted = true;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return Ok();
         }
     }
 }

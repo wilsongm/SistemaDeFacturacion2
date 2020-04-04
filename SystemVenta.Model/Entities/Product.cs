@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SystemVenta.Model.Generic;
 
 namespace SystemVenta.Model.Entities
 {
-    public class Product
+    public class Product : BaseModel
     {
         public Product()
         {
@@ -12,5 +13,6 @@ namespace SystemVenta.Model.Entities
         public int Id { get; set; }
         public string Nombre { get; set; }
         public double Precio { get; set; }
+
     }
 }
