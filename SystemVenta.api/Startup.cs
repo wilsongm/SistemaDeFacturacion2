@@ -41,6 +41,7 @@ namespace SystemVenta.api
                 cfg.UseSqlServer(Configuration.GetConnectionString("Wilson"));
             });
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProviderRepository, ProviderRepository>();
             services.AddCors(options =>
             {
                 options.AddPolicy("Todos",

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SystemVenta.Model.Generic;
 
-namespace SystemVenta.Model.Entities
+namespace SystemVenta.Bi.Dto
 {
-    public class Provider : BaseModel
+    class ProviderDto
     {
-        public Provider()
-        {
-        }
         public int Id { get; set; }
         public string Cedula { get; set; }
         public string Nombre { get; set; }
