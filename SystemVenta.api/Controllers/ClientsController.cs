@@ -14,53 +14,58 @@ namespace SystemVenta.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class providersController : ControllerBase
+    public class ClientsController : ControllerBase
     {
-        private readonly IProviderRepository _providerRepository;
+        private readonly IClientRepository _prociderRepository;
         private readonly IMapper _mapper;
         private readonly SystemVentaDbContext _context;
 
-        public providersController(IProviderRepository ProviderRepository, IMapper mapper, SystemVentaDbContext context)
+        public ClientsController(IClientRepository ClientRepository, IMapper mapper, SystemVentaDbContext context)
         {
-            _providerRepository = ProviderRepository;
+            _prociderRepository = ClientRepository;
             _mapper = mapper;
             this._context = context;
         }
-        // GET: api/providers
+        // GET: api/Clients
         [HttpGet("[action]")]
-        public IEnumerable<ProviderDto> GetProvider()
+        public IEnumerable<ClientDto> GetClient()
         {
-            var list = _context.Providers.Where(x => !x.IsDeleted).ToList();
+            var list = _context.Clients.Where(x => !x.IsDeleted).ToList();
 
 
-            return list.Select(p => new ProviderDto
+            return list.Select(p => new ClientDto
             {
                 Id = p.Id,
                 Cedula = p.Cedula,
                 Nombre = p.Nombre,
                 Telefono = p.Telefono,
-                Email = p.Email
+                Email = p.Email,
+                Category =p.Category
+
             });
         }
 
-
-
-        // POST: api/providers
+        // POST: api/Clients
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateProvider([FromBody] ProviderDto entityDto)
+        public async Task<IActionResult> CreateClient([FromBody] ClientDto entityDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            Provider provider = new Provider
+     
+
+            Client client = new Client
             {
                 Cedula = entityDto.Cedula,
                 Nombre = entityDto.Nombre,
                 Telefono = entityDto.Telefono,
-                Email = entityDto.Email
+                Email = entityDto.Email,
+                Category = entityDto.Category           
+                
             };
-            _context.Providers.Add(provider);
+
+            _context.Clients.Add(client);
             try
             {
                 await _context.SaveChangesAsync();
@@ -70,13 +75,14 @@ namespace SystemVenta.api.Controllers
 
                 throw;
             }
-            return Ok(provider);
+            return Ok(client);
 
         }
 
-        // PUT: api/providers/5
+
+        // PUT: api/Clients/5
         [HttpPut("[action]")]
-        public async Task<IActionResult> EditProvider(ProviderDto entityDto)
+        public async Task<IActionResult> EditClient(ClientDto entityDto)
         {
             if (!ModelState.IsValid)
             {
@@ -88,12 +94,14 @@ namespace SystemVenta.api.Controllers
                 return NotFound();
             }
 
-            var result = await _context.Providers.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
+            var result = await _context.Clients.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
 
             result.Cedula = entityDto.Cedula;
             result.Nombre = entityDto.Nombre;
             result.Telefono = entityDto.Telefono;
             result.Email = entityDto.Email;
+            result.Category = entityDto.Category;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -109,20 +117,20 @@ namespace SystemVenta.api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpPut("[action]/{id}")]
-        public async Task<IActionResult> DeleteProvider(int id)
+        public async Task<IActionResult> DeleteClient(int id)
         {
             if (id == 0)
             {
                 return BadRequest();
             }
 
-            var provider = await _context.Providers.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var client = await _context.Clients.Where(x => x.Id == id).FirstOrDefaultAsync();
 
-            if (provider is null)
+            if (client is null)
                 return NotFound();
 
 
-            provider.IsDeleted = true;
+            client.IsDeleted = true;
 
             try
             {

@@ -52,11 +52,13 @@ namespace SystemVenta.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryState");
+                    b.Property<string>("Category");
 
                     b.Property<string>("Cedula");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 

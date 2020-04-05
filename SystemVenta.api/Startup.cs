@@ -42,6 +42,7 @@ namespace SystemVenta.api
             });
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProviderRepository, ProviderRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddCors(options =>
             {
                 options.AddPolicy("Todos",

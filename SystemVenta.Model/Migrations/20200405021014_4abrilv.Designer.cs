@@ -10,8 +10,8 @@ using SystemVenta.Model.SystemVentaDb;
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    [Migration("20200403023550_2abrilv")]
-    partial class _2abrilv
+    [Migration("20200405021014_4abrilv")]
+    partial class _4abrilv
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,11 +54,13 @@ namespace SystemVenta.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryState");
+                    b.Property<string>("Category");
 
                     b.Property<string>("Cedula");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 
@@ -100,6 +102,8 @@ namespace SystemVenta.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Nombre");
 
                     b.Property<double>("Precio");
@@ -118,6 +122,8 @@ namespace SystemVenta.Model.Migrations
                     b.Property<string>("Cedula");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 
@@ -191,7 +197,7 @@ namespace SystemVenta.Model.Migrations
                         .HasForeignKey("EntryId");
 
                     b.HasOne("SystemVenta.Model.Entities.Product", "Product")
-                        .WithMany("Stocks")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

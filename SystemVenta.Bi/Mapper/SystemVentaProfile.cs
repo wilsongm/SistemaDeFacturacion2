@@ -17,6 +17,13 @@ namespace SystemVenta.Bi.Mapper
             CreateMap<Provider, ProviderDto>().ReverseMap();
             CreateMap<ProviderDto, Provider>().ReverseMap();
 
+            CreateMap<Client, ClientDto>().ReverseMap();
+            CreateMap<ClientDto, Client>().ReverseMap();
+
+            CreateMap<Entry, EntryDto>().ReverseMap();
+            CreateMap<EntryDto, Entry>().ReverseMap();
+
+
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SystemVenta.Model.Migrations
 {
-    public partial class _2abrilv : Migration
+    public partial class _4abrilv : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,11 +14,12 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Cedula = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
                     Telefono = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    CategoryState = table.Column<int>(nullable: false)
+                    Category = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,6 +32,7 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Nombre = table.Column<string>(nullable: true),
                     Precio = table.Column<double>(nullable: false)
                 },
@@ -45,6 +47,7 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Cedula = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
                     Telefono = table.Column<string>(nullable: true),
