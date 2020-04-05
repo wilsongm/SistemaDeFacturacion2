@@ -27,15 +27,25 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<int>("ClientId");
 
+                    b.Property<string>("ClientName");
+
+                    b.Property<bool>("ClientType");
+
                     b.Property<double>("Descuento");
 
                     b.Property<DateTime?>("Fecha");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<double>("Itbis");
 
                     b.Property<int>("ProductId");
 
+                    b.Property<string>("ProductSelled");
+
                     b.Property<int>("Quantity");
+
+                    b.Property<double>("Total");
 
                     b.HasKey("Id");
 
@@ -151,6 +161,8 @@ namespace SystemVenta.Model.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<int>("ProductId");
+
+                    b.Property<string>("ProductName");
 
                     b.Property<int>("Quantity");
 

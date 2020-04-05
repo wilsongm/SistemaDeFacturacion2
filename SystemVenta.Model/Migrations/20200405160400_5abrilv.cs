@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SystemVenta.Model.Migrations
 {
-    public partial class _4abrilv : Migration
+    public partial class _5abrilv : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,12 +64,16 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     Descuento = table.Column<double>(nullable: false),
                     Itbis = table.Column<double>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(nullable: false),
+                    ClientName = table.Column<string>(nullable: true),
+                    ProductSelled = table.Column<string>(nullable: true),
+                    ClientType = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,11 +98,13 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    PrividerId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    ProviderId = table.Column<int>(nullable: true)
+                    ProductName = table.Column<string>(nullable: true),
+                    ProviderName = table.Column<string>(nullable: true),
+                    ProviderId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,7 +120,7 @@ namespace SystemVenta.Model.Migrations
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,11 +129,13 @@ namespace SystemVenta.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Date = table.Column<DateTime>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     EntryId = table.Column<int>(nullable: true),
                     BillingId = table.Column<int>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

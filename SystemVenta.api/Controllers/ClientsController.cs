@@ -44,6 +44,34 @@ namespace SystemVenta.api.Controllers
 
             });
         }
+        [HttpGet("[action]")]
+        public IEnumerable<ClientDto> GetClientPrimiun()
+        {
+            var list = _context.Clients.Where(x => !x.IsDeleted && x.Category == "Primiun").ToList();
+
+
+            return list.Select(p => new ClientDto
+            {
+                Id = p.Id,
+                Nombre = p.Nombre,
+
+            });
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<ClientDto> GetClientRegular()
+        {
+            var list = _context.Clients.Where(x => !x.IsDeleted && x.Category == "Regular").ToList();
+
+
+            return list.Select(p => new ClientDto
+            {
+                Id = p.Id,
+                Nombre = p.Nombre,
+               
+
+            });
+        }
 
         // POST: api/Clients
         [HttpPost("[action]")]

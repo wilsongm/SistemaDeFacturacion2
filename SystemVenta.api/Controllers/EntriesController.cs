@@ -55,6 +55,7 @@ namespace SystemVenta.api.Controllers
             var provider = await _context.Providers.Where(x => x.Id == entityDto.ProviderId).FirstOrDefaultAsync();
 
 
+
             Entry entry = new Entry
             {
                 Fecha = DateTime.Now,
@@ -76,6 +77,46 @@ namespace SystemVenta.api.Controllers
 
                 throw;
             }
+            var productExist = await _context.Stocks.Where(x => x.ProductId == entityDto.ProductId).FirstOrDefaultAsync();
+
+            if(productExist != null)
+            {
+              
+              var result =  productExist.Quantity + entityDto.Quantity;
+
+                productExist.Quantity = result;
+
+             await   _context.SaveChangesAsync();
+
+            }
+            else
+            {
+                Stock stock = new Stock
+                {
+                    Date = DateTime.Now,
+                    Quantity = entityDto.Quantity,
+                    ProductId = entityDto.ProductId,
+                    ProductName = product.Nombre,
+                    EntryId = entry.Id
+                };
+
+                _context.Stocks.Add(stock);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+            }
+
+
             return Ok(entry);
 
         }
@@ -97,11 +138,14 @@ namespace SystemVenta.api.Controllers
 
             var result = await _context.Entries.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
 
+            var stock = await _context.Stocks.Where(x => x.EntryId == entityDto.Id).FirstOrDefaultAsync();
+
             result.Fecha = entityDto.Fecha;
             result.Quantity = entityDto.Quantity;
             result.ProviderId = entityDto.ProviderId;
             result.ProductId = entityDto.ProductId;
-            
+            stock.Quantity = entityDto.Quantity;
+            stock.Date = DateTime.Now;
 
             try
             {

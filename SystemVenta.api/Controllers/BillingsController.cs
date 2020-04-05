@@ -5,42 +5,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SystemVenta.Bi.Dto;
-using SystemVenta.Model.Entities;
 using SystemVenta.Model.SystemVentaDb;
 
 namespace SystemVenta.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StocksController : ControllerBase
+    public class BillingsController : ControllerBase
     {
         private readonly SystemVentaDbContext _context;
 
-        public StocksController(SystemVentaDbContext context)
+        public BillingsController(SystemVentaDbContext context)
         {
             _context = context;
         }
-        // GET: api/Stocks
+
+
         [HttpGet("[action]")]
-        public IEnumerable<StockDto> GetStock()
+        public IEnumerable<BillingDto> GetBilling()
         {
-            var list = _context.Stocks.Where(x => !x.IsDeleted).ToList();
+            var list = _context.Billings.Where(x => !x.IsDeleted).ToList();
 
 
-
-            return list.Select(p => new StockDto
+            return list.Select(p => new BillingDto
             {
-                Id = p.Id,
-                ProductName = p.ProductName,
-                Quantity = p.Quantity,
-                Date = p.Date
+                ProductSelled = p.ProductSelled,
+              ClientName = p.ClientName,
+              ClientType = p.ClientType,
+              Quantity = p.Quantity,
+              Fecha = p.Fecha
 
             });
         }
-
-
-        // GET: api/Stocks/5
-
-
     }
 }

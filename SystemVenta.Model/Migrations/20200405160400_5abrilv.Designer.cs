@@ -10,8 +10,8 @@ using SystemVenta.Model.SystemVentaDb;
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    [Migration("20200405041419_4abrilv1")]
-    partial class _4abrilv1
+    [Migration("20200405160400_5abrilv")]
+    partial class _5abrilv
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,21 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<int>("ClientId");
 
+                    b.Property<string>("ClientName");
+
+                    b.Property<bool>("ClientType");
+
                     b.Property<double>("Descuento");
 
                     b.Property<DateTime?>("Fecha");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<double>("Itbis");
 
                     b.Property<int>("ProductId");
+
+                    b.Property<string>("ProductSelled");
 
                     b.Property<int>("Quantity");
 
@@ -81,13 +89,11 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<int>("PrividerId");
-
                     b.Property<int>("ProductId");
 
                     b.Property<string>("ProductName");
 
-                    b.Property<int?>("ProviderId");
+                    b.Property<int>("ProviderId");
 
                     b.Property<string>("ProviderName");
 
@@ -156,6 +162,8 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<int>("ProductId");
 
+                    b.Property<string>("ProductName");
+
                     b.Property<int>("Quantity");
 
                     b.HasKey("Id");
@@ -191,7 +199,8 @@ namespace SystemVenta.Model.Migrations
 
                     b.HasOne("SystemVenta.Model.Entities.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderId");
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SystemVenta.Model.Entities.Stock", b =>
