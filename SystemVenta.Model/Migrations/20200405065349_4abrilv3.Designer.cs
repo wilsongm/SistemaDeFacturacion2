@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SystemVenta.Model.SystemVentaDb;
 
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    partial class SystemVentaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200405065349_4abrilv3")]
+    partial class _4abrilv3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,11 +54,13 @@ namespace SystemVenta.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryState");
+                    b.Property<string>("Category");
 
                     b.Property<string>("Cedula");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 
@@ -75,11 +79,15 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<DateTime>("Fecha");
 
-                    b.Property<int>("PrividerId");
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("ProductId");
 
-                    b.Property<int?>("ProviderId");
+                    b.Property<string>("ProductName");
+
+                    b.Property<int>("ProviderId");
+
+                    b.Property<string>("ProviderName");
 
                     b.Property<int>("Quantity");
 
@@ -97,6 +105,8 @@ namespace SystemVenta.Model.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 
@@ -116,6 +126,8 @@ namespace SystemVenta.Model.Migrations
                     b.Property<string>("Cedula");
 
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Nombre");
 
@@ -138,15 +150,9 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<int?>("EntryId");
 
-<<<<<<< Updated upstream
-                    b.Property<int>("ProductId");
-=======
                     b.Property<bool>("IsDeleted");
 
                     b.Property<int?>("ProductId");
-
-                    b.Property<string>("ProductName");
->>>>>>> Stashed changes
 
                     b.Property<int>("Quantity");
 
@@ -183,7 +189,8 @@ namespace SystemVenta.Model.Migrations
 
                     b.HasOne("SystemVenta.Model.Entities.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderId");
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SystemVenta.Model.Entities.Stock", b =>
@@ -197,14 +204,8 @@ namespace SystemVenta.Model.Migrations
                         .HasForeignKey("EntryId");
 
                     b.HasOne("SystemVenta.Model.Entities.Product", "Product")
-<<<<<<< Updated upstream
-                        .WithMany("Stocks")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-=======
                         .WithMany()
                         .HasForeignKey("ProductId");
->>>>>>> Stashed changes
                 });
 #pragma warning restore 612, 618
         }
