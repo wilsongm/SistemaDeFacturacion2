@@ -23,6 +23,9 @@ namespace SystemVenta.Bi.Mapper
             CreateMap<Entry, EntryDto>().ReverseMap();
             CreateMap<EntryDto, Entry>().ReverseMap();
 
+            CreateMap<Stock, StockDto>().ReverseMap();
+            CreateMap<StockDto, Stock>().ReverseMap();
+
 
         }
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SystemVenta.Model.SystemVentaDb;
 
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    partial class SystemVentaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200405041419_4abrilv1")]
+    partial class _4abrilv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,11 +81,13 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<bool>("IsDeleted");
 
+                    b.Property<int>("PrividerId");
+
                     b.Property<int>("ProductId");
 
                     b.Property<string>("ProductName");
 
-                    b.Property<int>("ProviderId");
+                    b.Property<int?>("ProviderId");
 
                     b.Property<string>("ProviderName");
 
@@ -187,8 +191,7 @@ namespace SystemVenta.Model.Migrations
 
                     b.HasOne("SystemVenta.Model.Entities.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProviderId");
                 });
 
             modelBuilder.Entity("SystemVenta.Model.Entities.Stock", b =>

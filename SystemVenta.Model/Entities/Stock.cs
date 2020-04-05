@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SystemVenta.Model.Generic;
 
 namespace SystemVenta.Model.Entities
 {
-    public class Stock
+    public class Stock : BaseModel
     {
+        public Stock()
+        {
+
+        }
         public int Id { get; set; }
         public DateTime? Date { get; set; }
         public int Quantity { get; set; }
