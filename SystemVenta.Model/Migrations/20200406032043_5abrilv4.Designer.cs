@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SystemVenta.Model.SystemVentaDb;
 
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    partial class SystemVentaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200406032043_5abrilv4")]
+    partial class _5abrilv4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

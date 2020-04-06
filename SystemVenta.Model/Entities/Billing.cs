@@ -18,6 +18,7 @@ namespace SystemVenta.Model.Entities
         public Client Client { get; set; }
         public Product Product { get; set; }
         public string ClientName { get; set; }
+        public string ProducName { get; set; }
         public string ProductSelled { get; set; }
         public  double Total { get; set; }
         public bool ClientType { get; set; }
