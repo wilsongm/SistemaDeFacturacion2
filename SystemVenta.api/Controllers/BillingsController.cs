@@ -34,6 +34,7 @@ namespace SystemVenta.api.Controllers
               ProductSelled = p.ProductSelled,
               ClientName = p.ClientName,
               Total = p.Total,
+              Itbis = p.Itbis,
               ClientType = p.ClientType,
               ProducName = p.ProducName,
               ProductId = p.ProductId,
@@ -65,7 +66,8 @@ namespace SystemVenta.api.Controllers
                 ProductId = entityDto.ProductId,
                 ProducName = product.Nombre,
                 ClientName = Client.Nombre,
-                Total = entityDto.Total
+                Total = entityDto.Total,
+                Itbis = entityDto.Itbis,
 
             };
 
@@ -147,6 +149,7 @@ namespace SystemVenta.api.Controllers
             result.ClientId = entityDto.ClientId;
             result.ProductId = entityDto.ProductId;
             result.Total = entityDto.Total;
+            result.Itbis = entityDto.Itbis;
             stock.Quantity = entityDto.Quantity;
             stock.Date = DateTime.Now;
 
