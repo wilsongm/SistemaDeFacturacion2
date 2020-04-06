@@ -33,6 +33,7 @@ namespace SystemVenta.api.Controllers
             {
               ProductSelled = p.ProductSelled,
               ClientName = p.ClientName,
+              Total = p.Total,
               ClientType = p.ClientType,
               ProducName = p.ProducName,
               ProductId = p.ProductId,
@@ -64,6 +65,7 @@ namespace SystemVenta.api.Controllers
                 ProductId = entityDto.ProductId,
                 ProducName = product.Nombre,
                 ClientName = Client.Nombre,
+                Total = entityDto.Total
 
             };
 
@@ -98,6 +100,7 @@ namespace SystemVenta.api.Controllers
                     ProductId = entityDto.ProductId,
                     ProductName = product.Nombre,
                     BillingId = billing.Id
+                    
                 };
 
                 _context.Stocks.Add(stock);
@@ -137,12 +140,13 @@ namespace SystemVenta.api.Controllers
 
             var result = await _context.Billings.Where(x => x.Id == entityDto.Id).FirstOrDefaultAsync();
 
-            var stock = await _context.Stocks.Where(x => x.EntryId == entityDto.Id).FirstOrDefaultAsync();
+            var stock = await _context.Stocks.Where(x => x.BillingId == entityDto.Id).FirstOrDefaultAsync();
 
             result.Fecha = entityDto.Fecha;
             result.Quantity = entityDto.Quantity;
             result.ClientId = entityDto.ClientId;
             result.ProductId = entityDto.ProductId;
+            result.Total = entityDto.Total;
             stock.Quantity = entityDto.Quantity;
             stock.Date = DateTime.Now;
 
