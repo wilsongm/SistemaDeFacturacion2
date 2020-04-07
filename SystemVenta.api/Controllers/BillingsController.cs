@@ -31,13 +31,12 @@ namespace SystemVenta.api.Controllers
 
             return list.Select(p => new BillingDto
             {
-              ProductSelled = p.ProductSelled,
               ClientName = p.ClientName,
+              Descuento = p.Descuento,
               Total = p.Total,
               Itbis = p.Itbis,
               ClientType = p.ClientType,
               ProducName = p.ProducName,
-              ProductId = p.ProductId,
               Quantity = p.Quantity,
               Fecha = p.Fecha
 
@@ -68,6 +67,7 @@ namespace SystemVenta.api.Controllers
                 ClientName = Client.Nombre,
                 Total = entityDto.Total,
                 Itbis = entityDto.Itbis,
+                Descuento = entityDto.Descuento
 
             };
 
@@ -149,6 +149,7 @@ namespace SystemVenta.api.Controllers
             result.ClientId = entityDto.ClientId;
             result.ProductId = entityDto.ProductId;
             result.Total = entityDto.Total;
+            result.Descuento = entityDto.Descuento;
             result.Itbis = entityDto.Itbis;
             stock.Quantity = entityDto.Quantity;
             stock.Date = DateTime.Now;

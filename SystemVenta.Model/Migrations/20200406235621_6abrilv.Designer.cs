@@ -10,8 +10,8 @@ using SystemVenta.Model.SystemVentaDb;
 namespace SystemVenta.Model.Migrations
 {
     [DbContext(typeof(SystemVentaDbContext))]
-    [Migration("20200406031159_5abrilv2")]
-    partial class _5abrilv2
+    [Migration("20200406235621_6abrilv")]
+    partial class _6abrilv
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

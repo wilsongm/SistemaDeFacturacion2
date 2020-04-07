@@ -37,10 +37,16 @@ namespace SystemVenta.api.Controllers
 
             });
         }
-
-
-        // GET: api/Stocks/5
-
-
+        [HttpGet("GetStockById/{id}")]
+        public IActionResult GetStockById([FromRoute] int id)
+        {
+            var list = _context.Stocks.Where(x => x.ProductId == id).ToList();
+            var quantity = 0;
+            foreach (var item in list.Select(x => x.Quantity))
+            {
+                quantity = item;
+            }
+            return Ok(quantity);
+        }
     }
 }
