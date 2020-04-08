@@ -43,8 +43,6 @@ namespace SystemVenta.Model.Migrations
 
                     b.Property<int>("ProductId");
 
-                    b.Property<string>("ProductSelled");
-
                     b.Property<int>("Quantity");
 
                     b.Property<double>("Total");

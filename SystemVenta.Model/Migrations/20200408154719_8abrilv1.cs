@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SystemVenta.Model.Migrations
 {
-    public partial class _6abrilv : Migration
+    public partial class _8abrilv1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,7 +73,6 @@ namespace SystemVenta.Model.Migrations
                     ClientId = table.Column<int>(nullable: false),
                     ClientName = table.Column<string>(nullable: true),
                     ProducName = table.Column<string>(nullable: true),
-                    ProductSelled = table.Column<string>(nullable: true),
                     Total = table.Column<double>(nullable: false),
                     ClientType = table.Column<bool>(nullable: false)
                 },

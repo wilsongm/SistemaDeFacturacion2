@@ -144,10 +144,10 @@ namespace SystemVenta.api.Controllers
 
             var stock = await _context.Stocks.Where(x => x.BillingId == entityDto.Id).FirstOrDefaultAsync();
 
+            result.ProductId = entityDto.ProductId;
             result.Fecha = entityDto.Fecha;
             result.Quantity = entityDto.Quantity;
             result.ClientId = entityDto.ClientId;
-            result.ProductId = entityDto.ProductId;
             result.Total = entityDto.Total;
             result.Descuento = entityDto.Descuento;
             result.Itbis = entityDto.Itbis;
@@ -165,6 +165,36 @@ namespace SystemVenta.api.Controllers
             }
             return Ok();
 
+        }
+
+
+        // DELETE: api/ApiWithActions/5
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> DeleteBilling(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var billing = await _context.Billings.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (billing is null)
+                return NotFound();
+
+
+            billing.IsDeleted = true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Ok();
         }
     }
 }
